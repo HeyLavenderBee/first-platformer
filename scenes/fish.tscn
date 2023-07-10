@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuga6wg2ykrom"]
+
+[ext_resource type="Texture2D" uid="uid://t61n35tfxiob" path="res://cat-mouse-art/fish-coin-version1.png" id="1_6rp8g"]
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_e6xjk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5uqwh"]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ek6gk"]
+radius = 11.0
+
+[node name="fish" type="CharacterBody2D" groups=["fish_points"]]
+script = ExtResource("1_e6xjk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6rp8g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5uqwh")
+disabled = true
+
+[node name="detect" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect"]
+shape = SubResource("CircleShape2D_ek6gk")
+
+[connection signal="body_entered" from="detect" to="." method="_on_detect_body_entered"]
+[connection signal="body_exited" from="detect" to="." method="_on_detect_body_exited"]
